@@ -6,7 +6,10 @@ body{
     padding: 15px;
     background-color: rgb(110, 104, 104);
     max-width: 400px;
-    margin: auto;
+    min-width: 250px;
+    border-radius: 10px;
+    margin: 30px auto;
+    box-shadow: 0 0 10px #999;
 }
 .head{
     padding: 10px;
@@ -31,25 +34,31 @@ body{
         padding: 10px;
         background-color: white;
     }
+    .kay .num{
+        display: flex;
+        flex-wrap: wrap;
+        /* flex-grow: 1px; */
+        justify-content: space-evenly;
+    }
    
     .kay .num span
     { 
-
+         display: flex;
+         justify-content: center;
+         align-items: center;
         padding: 10px;
-        width: 18%;
-        display: inline-block;
-        height: 20px;
+        width: calc((100% - 41% )/4);
         margin: 5px 0;
-        text-align: center;
+        border-radius: 6px;
         font-size: 25px;
         font-weight: bold;
         border: 2px solid #222;
-        line-height: 20px;
         background-color: rgb(208, 219, 219);
         cursor: pointer;
         }
         .kay .num span:active{
             border-color: blueviolet;
             color: blueviolet;
-            background-color: blanchedalmond;
+            background-color: rgb(15, 167, 35);
         }
+
