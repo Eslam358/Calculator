@@ -1,7 +1,7 @@
 let num = document.querySelectorAll(".num span");
 let esl_1 = document.querySelector("input");
 
-let A = "1234567890000.";
+let A = "1234567890000";
 let Arr =[];
 let value_1 = [];
 let value_2 = [];
@@ -10,20 +10,28 @@ let value_2 = [];
 
 num.forEach((e, index)=>{
   e.addEventListener("click", (k)=>{
-      console.log(e);
-      // dk.target
+      // console.log(e);
+
       // k.target.style.color="red"
-      Arr[0] == 0 && Arr.length > 0?Arr.shift() :"";
+      Arr[0] == 0 && Arr.length > 0 && Arr[1] !== "."?Arr.shift() :"";
 //....................................................................
       if (Arr.length === 0) {
-        if(A.includes(e.innerHTML) && e.innerHTML !== "="){
+        if(A.includes(e.innerHTML)){
           Arr.push(e.innerHTML)
            esl_1.value = Arr.join("");
           }
-        }else if(A.includes(Arr[Arr.length -1]) && e.innerHTML !== "="){
+          if (A.includes(Arr[Arr.length -1]) == 0 && e.innerHTML == "." ) {
+            Arr.push(0 ,`${e.innerHTML}`);
+            esl_1.value = Arr.join("");
+            // console.log(Arr);
+          }
+
+        }else if(A.includes(Arr[Arr.length -1]) && e.innerHTML !== "=" && e.innerHTML !== "Del" && e.innerHTML !== "C"){
          Arr.push(e.innerHTML)
-          esl_1.value = Arr.join("");
-       }else if(!A.includes(Arr[Arr.length -1]) && e.innerHTML !== "="){
+        esl_1.value = Arr.join("");
+
+        // A.includes(Arr[Arr.length -1]) == 0 && e.innerHTML == "." ? {Arr.push(e.innerHTML)  esl_1.value = Arr.join("")}
+       }else if(!A.includes(Arr[Arr.length -1]) && e.innerHTML !== "=" && e.innerHTML !== "Del" && e.innerHTML !== "C"){
         if(A.includes(e.innerHTML)){
           Arr.push(e.innerHTML)
            esl_1.value = Arr.join("");
@@ -37,17 +45,13 @@ if(e.innerHTML == "C"){
   }
   if(e.innerHTML == "Del"){ 
     value_2 =[];
-    Arr.pop()
-    Arr.pop()
+    Arr.pop();
+    // console.log(Arr);
+    // Arr.splice(-1, 1);
     esl_1.value = Arr.join("").length > 0 ? Arr.join(""):0;
-   console.log(Arr);
+  //  console.log(Arr);
   }
-  //******* */
-// esl_1.addEventListener("change", ()=>{
-//   Arr = esl_1.value.split("");
-//   value_2 = [];
-// })
-
+  
 //.......................................................................
   
   if(e.innerHTML == "="){
@@ -57,7 +61,7 @@ if(e.innerHTML == "C"){
 
 Arr.forEach((r)=>{
   if (A.includes(Arr[Arr.length -1])) {
-    if (A.includes(r)) {
+    if (A.includes(r) || r == ".") {
       value_1.push(r)
     }else{
       value_2.push(value_1.join(""), r)
@@ -75,28 +79,28 @@ value_2.push(value_1.join(""));
 
    if (value_2.includes("/")) {
      let vv = value_2.indexOf("/");
-     let v = (value_2[vv-1] ) / (+value_2[vv + 1]);
+     let v = (+value_2[vv-1] ) / (+value_2[vv + 1]);
      value_2[vv-1]  = v
      value_2.splice(vv, 2);
     };
 
    if (value_2.includes("*")) {
      let vv = value_2.indexOf("*");
-     let v = (value_2[vv-1]) * (+value_2[vv + 1]);
+     let v = (+value_2[vv-1]) * (+value_2[vv + 1]);
      value_2[vv-1]  = v
      value_2.splice(vv, 2);
     };
 
    if (!value_2.includes("*") && !value_2.includes("/") && value_2.includes("+") ) {
      let vv = value_2.indexOf("+");
-     let v = (value_2[vv-1]) + (+value_2[vv + 1]);
+     let v = (+value_2[vv-1]) + (+value_2[vv + 1]);
      value_2[vv-1]  = v
      value_2.splice(vv, 2);
     };
 
    if (!value_2.includes("*") && !value_2.includes("/") && value_2.includes("-")) {
      let vv = value_2.indexOf("-");
-     let v = (value_2[vv-1]) - (+value_2[vv + 1]);
+     let v = (+value_2[vv-1]) - (+value_2[vv + 1]);
      value_2[vv-1]  = v
      value_2.splice(vv, 2);
     };
@@ -104,11 +108,11 @@ value_2.push(value_1.join(""));
    if (value_2.includes("%")) {
      let vv = value_2.indexOf("%");
      if ((+value_2[vv + 1])) {
-       let v = ((value_2[vv-1]) * (+value_2[vv + 1])) / 100;
+       let v = ((+value_2[vv-1]) * (+value_2[vv + 1])) / 100;
        value_2[vv-1]  = v
        value_2.splice(vv, 2);
      }else{
-       let v = (value_2[vv-1])  / 100;
+       let v = (+value_2[vv-1])  / 100;
        value_2[vv-1]  = v
        value_2.splice(vv, 2);
     }
@@ -118,12 +122,21 @@ value_2.push(value_1.join(""));
  }
              esl_1.value = value_2[0];
              Arr = value_2[0].toString().split("");
-             console.log(value_2);
-             console.log(Arr);
+            //  console.log(value_2);
+            //  console.log(Arr);
     }
   })
 });
 //.......................................................................
+
+  
+
+
+  
+  
+  
+  
+
 
   
 
